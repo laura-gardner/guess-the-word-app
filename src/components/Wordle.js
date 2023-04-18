@@ -15,7 +15,8 @@ import useWordle from '../hooks/useWordle'
   
     return (
     <div>
-        Current guess - {currentGuess}
+        <div>solution - {solution}</div>
+        <div>Current guess - {currentGuess}</div>
     </div>
   )
 }

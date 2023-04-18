@@ -13,8 +13,27 @@ const useWordle = (solution) => {
     // format guess into an array of letter objects
     // e.g. [{key: 'a', colorL 'yellow'}]
     const formatGuess = () => {
-        console.log('Formatting the guess - ', currentGuess)
+        let solutionArray = [...solution]
+        let formattedGuess = [...currentGuess].map((letter) => {
+            return {key: letter, color: 'grey'}
+        })
+        // find any letters in the correct position and color -> green
+        formattedGuess.forEach((letter, index) => {
+            if (solutionArray[index] === letter.key) {
+                formattedGuess[index].color = 'green'
+                solutionArray[index] = null
+            }        
+        })
 
+        //find any letters in the wrong position and color -> yellow
+        formattedGuess.forEach((letter, index) => {
+            if (solutionArray.includes(letter.key) && letter.color !== 'green') {
+                formattedGuess[index].color = 'yellow'
+                solutionArray[solutionArray.indexOf(letter.key)] = null
+            }
+        })
+
+        return formattedGuess
     }
 
     // add a new guess to the guesses state
@@ -43,7 +62,9 @@ const useWordle = (solution) => {
                 console.log("This guess doesn't have enough letters")
                 return
             }
-            formatGuess()
+            
+            const formatted = formatGuess()
+            console.log(formatted)
         }
 
         if (key === 'Backspace') {

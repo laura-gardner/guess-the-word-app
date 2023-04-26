@@ -10,8 +10,19 @@ import Keypad from './Keypad'
   useEffect(() => {
     window.addEventListener('keyup', handleKeyup)
 
+    if (isCorrect) {
+      console.log("Congrats, you win!")
+      window.removeEventListener('keyup', handleKeyup)
+    }
+
+    if (turn > 5) {
+      console.log("Unlucky, you're out of guesses")
+      window.removeEventListener('keyup', handleKeyup)
+    }
+
     return () => window.removeEventListener('keyup', handleKeyup)
-  })
+  }, [handleKeyup, isCorrect, turn])
+
   
   
     return (

@@ -62,11 +62,11 @@ const useWordle = (solution) => {
                     newKeys[letter.key] = 'green'
                     return
                 }
-                if (letter.color === 'yellow' && letter.color !== 'green') {
+                if (letter.color === 'yellow' && currentColor !== 'green') {
                     newKeys[letter.key] = 'yellow'
                     return
                 }
-                if (letter.color === 'grey' && letter.color !== 'yellow' && letter.color !== 'green') {
+                if (letter.color === 'grey' && currentColor !== 'green' && currentColor !== 'yellow') {
                     newKeys[letter.key] = 'grey'
                     return
                 }
@@ -119,7 +119,7 @@ const useWordle = (solution) => {
         }
     }
 
-    return {turn, currentGuess, guesses, isCorrect, handleKeyup}
+    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup}
 }
 
 export default useWordle;

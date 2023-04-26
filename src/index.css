@@ -87,6 +87,25 @@ body {
   line-height: 40px;
 }
 
+.keypad > div.green {
+  background: #5ac85a;
+  color: #fff;
+  transition: all 0.3s ease-in;
+  transition-delay: 1s;
+}
+.keypad > div.yellow {
+  background: #e2cc68;
+  color: #fff;
+  transition: all 0.3s ease-in;
+  transition-delay: 1s;
+}
+.keypad > div.grey {
+  background: #a1a1a1;
+  color: #fff;
+  transition: all 0.3s ease-in;
+  transition-delay: 1s;
+}
+
 /* animations */
 
 @keyframes flip {

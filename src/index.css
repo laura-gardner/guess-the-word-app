@@ -125,11 +125,18 @@ body {
   box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
 }
 .modal .solution {
-  color: #ff004c;
   font-weight: bold;
   font-size: 0.8em;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.incorrect {
+  color: #ff004c;
+}
+
+.correct {
+  color: #5ac85a;
 }
 
 /* animations */

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import words from '../data/words';
 
 const useWordle = (solution) => {
 
@@ -8,6 +9,10 @@ const useWordle = (solution) => {
     const [history, setHistory] = useState([]) // each guess is a string
     const [isCorrect, setIsCorrect] = useState(false)
     const [usedKeys, setUsedKeys] = useState({}) // {a: 'green', b: 'yellow' etc}
+    const possibleWords = []
+    words.forEach((word) => {
+        possibleWords.push(word.word)
+    })
 
     // format guess into an array of letter objects
     // e.g. [{key: 'a', colorL 'yellow'}]
@@ -93,14 +98,21 @@ const useWordle = (solution) => {
                 console.log('You have already guessed that word')
                 return
             }
+            // check word against list of valid words
+            if (!possibleWords.includes(currentGuess)) {
+                console.log("That is not a valid guess")
+            } 
+            
             // only add guess if guess.length === 5
             if (currentGuess.length !== 5) {
                 console.log("This guess doesn't have enough letters")
                 return
             }
-            
-            const formatted = formatGuess()
-            addNewGuess(formatted)
+            // add word if it meets criteria
+            if (possibleWords.includes(currentGuess)) {
+                const formatted = formatGuess()
+                addNewGuess(formatted)
+            } 
         }
 
         if (key === 'Backspace') {

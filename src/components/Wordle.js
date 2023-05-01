@@ -3,10 +3,11 @@ import useWordle from '../hooks/useWordle'
 import Grid from './Grid'
 import Keypad from './Keypad'
 import Modal from './Modal'
+import Error from './Error'
 
 
  const Wordle = ({ solution }) => {
-  const { currentGuess, guesses, turn, isCorrect, handleKeyup, usedKeys } = useWordle(solution) 
+  const { currentGuess, guesses, turn, isCorrect, handleKeyup, usedKeys, messageStatus } = useWordle(solution) 
 
   const [showModal, setShowModal] = useState(false)
   
@@ -33,6 +34,7 @@ import Modal from './Modal'
       <Grid guesses={guesses} currentGuess={currentGuess} turn={turn}/>
       <Keypad usedKeys={usedKeys}/>
       {showModal && <Modal isCorrect={isCorrect} turn={turn} solution={solution}/>}
+      {messageStatus && <Error messageStatus={messageStatus}/>}
     </div>
   )
 }

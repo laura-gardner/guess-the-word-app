@@ -9,6 +9,7 @@ const useWordle = (solution) => {
     const [history, setHistory] = useState([]) // each guess is a string
     const [isCorrect, setIsCorrect] = useState(false)
     const [usedKeys, setUsedKeys] = useState({}) // {a: 'green', b: 'yellow' etc}
+    const [messageStatus, setMessageStatus] = useState('') // messageState will display various messages for invalid guesses
     const possibleWords = []
     words.forEach((word) => {
         possibleWords.push(word.word)
@@ -90,22 +91,24 @@ const useWordle = (solution) => {
         if (key === 'Enter') {
             // only add guess if turn < 5
             if (turn > 5) {
-                console.log('You have used all your guesses')
                 return
             }
             // only add guess if word has not already been guessed
             if (history.includes(currentGuess)) {
-                console.log('You have already guessed that word')
+                setMessageStatus('alreadyGuessed')
+                setTimeout(() => setMessageStatus(''), 500)
                 return
             }
             // check word against list of valid words
             if (!possibleWords.includes(currentGuess)) {
-                console.log("That is not a valid guess")
+                setMessageStatus('invalidWord')
+                setTimeout(() => setMessageStatus(''), 500)
             } 
             
             // only add guess if guess.length === 5
             if (currentGuess.length !== 5) {
-                console.log("This guess doesn't have enough letters")
+                setMessageStatus('notEnoughLetters')
+                setTimeout(() => setMessageStatus(''), 500)
                 return
             }
             // add word if it meets criteria
@@ -131,7 +134,7 @@ const useWordle = (solution) => {
         }
     }
 
-    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup}
+    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup, messageStatus}
 }
 
 export default useWordle;
